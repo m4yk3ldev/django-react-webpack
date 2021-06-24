@@ -3,15 +3,17 @@ import ReactDom from "react-dom";
 import "../asserts/scss/style.scss"
 import Header from "./layout/Header";
 import Dashboard from "./leads/Dashboard";
+import Alerts from "./layout/Alerts";
 import AlertTemplate from "react-alert-template-basic";
-import {Provider as AlertProvider} from "react-alert";
+import {transitions, positions, Provider as AlertProvider} from 'react-alert'
 import {Provider} from "react-redux";
 import store from "../store";
 
 //Alert Options
 const alertOptions = {
+    position: positions.TOP_CENTER,
     timeout: 3000,
-    position: "top center"
+    transition: transitions.FADE
 }
 
 class App extends React.Component {
@@ -21,6 +23,7 @@ class App extends React.Component {
                 <AlertProvider template={AlertTemplate}{...alertOptions}>
                     <React.Fragment>
                         <Header/>
+                        <Alerts/>
                         <div className="container">
                             <Dashboard/>
                         </div>

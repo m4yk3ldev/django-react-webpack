@@ -30,12 +30,12 @@ class Form extends React.Component {
                     <form onSubmit={this.onSubmit}>
                         <div className="form-group">
                             <label>Name</label>
-                            <input type="text" className="form-control" name="name" onChange={this.onChange}
+                            <input type="text" required={true} className="form-control" name="name" onChange={this.onChange}
                                    value={name}/>
                         </div>
                         <div className="form-group">
                             <label>Email</label>
-                            <input type="email" className="form-control" name="email" onChange={this.onChange}
+                            <input type="email" required={true} className="form-control" name="email" onChange={this.onChange}
                                    value={email}/>
                         </div>
                         <div className="form-group">

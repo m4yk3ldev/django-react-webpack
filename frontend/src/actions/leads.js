@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ADD_LEAD, DELETE_LEAD, GET_LEADS} from "./types";
+import {ADD_LEAD, DELETE_LEAD, GET_ERRORS, GET_LEADS} from "./types";
 
 // GET LEADS
 export const getLeads = () => dispatch => {
@@ -9,7 +9,7 @@ export const getLeads = () => dispatch => {
             payload: data.data
         });
     }).catch(err => console.log(err));
-}
+};
 
 // DELETE LEAD
 export const deleteLead = (id) => dispatch => {
@@ -19,7 +19,7 @@ export const deleteLead = (id) => dispatch => {
             payload: id
         });
     }).catch(err => console.log(err));
-}
+};
 
 // ADD LEAD
 export const addLead = (lead) => dispatch => {
@@ -28,5 +28,15 @@ export const addLead = (lead) => dispatch => {
             type: ADD_LEAD,
             payload: data.data
         });
-    }).catch(err => console.log(err));
-}
+    }).catch(err => {
+        const errors = {
+            msg: err.response.data,
+            status: err.response.status
+        }
+        dispatch({
+            type: GET_ERRORS,
+            payload: errors
+        })
+
+    });
+};
