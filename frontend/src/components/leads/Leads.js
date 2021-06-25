@@ -36,7 +36,8 @@ class Leads extends React.Component {
                             <td>{lead.message}</td>
                             <td>
                                 <button className="btn btn-danger btn-sm"
-                                        onClick={this.props.deleteLead.bind(this, lead.id)}>DELETE
+                                        onClick={this.props.deleteLead.bind(this, lead.id)}>
+                                    DELETE
                                 </button>
                             </td>
                         </tr>
