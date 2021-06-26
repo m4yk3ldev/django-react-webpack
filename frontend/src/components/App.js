@@ -12,6 +12,7 @@ import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
 import PrivateRoute from "./common/PrivateRoute";
+import {loadUser} from "../actions/auth";
 
 //Alert Options
 const alertOptions = {
@@ -21,6 +22,11 @@ const alertOptions = {
 }
 
 class App extends React.Component {
+    componentWillMount() {
+        store.dispatch(
+            loadUser());
+    }
+
     render() {
         return (
             <Provider store={store}>
@@ -31,9 +37,9 @@ class App extends React.Component {
                             <Alerts/>
                             <div className="container">
                                 <Switch>
-                                    <PrivateRoute exact path='/' component={Dashboard}/>
                                     <Route exact path='/register' component={Register}/>
                                     <Route exact path='/login' component={Login}/>
+                                    <PrivateRoute exact path='/' component={Dashboard}/>
                                 </Switch>
                             </div>
                         </React.Fragment>

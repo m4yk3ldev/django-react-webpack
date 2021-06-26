@@ -36,11 +36,7 @@ class Alerts extends React.Component {
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <br/>
-            </React.Fragment>
-        );
+        return <React.Fragment/>;
     }
 }
 
