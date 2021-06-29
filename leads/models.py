@@ -11,3 +11,6 @@ class Lead(models.Model):
     message = models.CharField(max_length=500, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, models.CASCADE, null=True)
+
+    def __str__(self):
+        return f"{self.name} owner: {self.owner}"

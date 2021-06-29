@@ -5,17 +5,21 @@ import PropTypes from "prop-types";
 import {logout} from "../../actions/auth"
 
 class Header extends React.Component {
+
     static propTypes = {
         auth: PropTypes.object.isRequired,
         logout: PropTypes.func.isRequired,
     }
 
-
     render() {
         const {isAuthenticated, user} = this.props.auth;
-        console.log(user);
         const authLinks = (
             <ul className="navbar-nav ms-auto mb-2 mb-sm-0">
+                <span className="navbar-text me-3">
+                    <strong>
+                        {user ? "Welcome " + user.username : null}
+                    </strong>
+                </span>
                 <li className="nav-item">
                     <button className="nav-link btn btn-info btn-sm text-dark" onClick={this.props.logout}>Logout
                     </button>
