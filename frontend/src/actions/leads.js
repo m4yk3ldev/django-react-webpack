@@ -38,7 +38,7 @@ export const deleteLead = (id) => (dispatch, getState) => {
     if (token) {
         config.headers['Authorization'] = "Token " + token;
     }
-    axios.delete('/api/leads/' + id, config).then(data => {
+    axios.delete('/api/leads/' + id, config).then(() => {
         dispatch(createMessage({deleteLead: "Delete Lead"}))
         dispatch({
             type: DELETE_LEAD,
