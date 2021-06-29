@@ -22,6 +22,9 @@ class Alerts extends React.Component {
             if (error.msg.message) {
                 alert.error("Mensaje: " + error.msg.message.join());
             }
+            if (error.msg.non_field_errors) {
+                alert.error(error.msg.non_field_errors.join());
+            }
         }
 
         if (messages !== prepProps.messages) {

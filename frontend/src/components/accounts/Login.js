@@ -11,8 +11,8 @@ class Login extends React.Component {
         password: '',
     }
     static propTypes = {
-        isAuthenticated: PropTypes.bool,
         login: PropTypes.func.isRequired,
+        isAuthenticated: PropTypes.bool,
     }
     onSubmit = (e) => {
         e.preventDefault();
