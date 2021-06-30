@@ -34,6 +34,9 @@ class Alerts extends React.Component {
             if (messages.addLead) {
                 alert.success(messages.addLead);
             }
+            if (messages.passwordNotMatch) {
+                alert.error(messages.passwordNotMatch);
+            }
         }
 
     }

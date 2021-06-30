@@ -1,4 +1,12 @@
-import {AUTH_ERROR, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT_SUCCESS, USER_LOADED, USER_LOADING} from "./types";
+import {
+    AUTH_ERROR,
+    LOGIN_FAIL,
+    LOGIN_SUCCESS,
+    LOGOUT_SUCCESS, REGISTER_FAIL,
+    REGISTER_SUCCESS,
+    USER_LOADED,
+    USER_LOADING
+} from "./types";
 import {returnErrors} from "./messages";
 import axios from "axios";
 
@@ -68,4 +76,25 @@ export const logout = () => (dispatch, getState) => {
         dispatch(returnErrors(err.response.data, err.response.status));
         dispatch({type: AUTH_ERROR});
     })
-}
+};
+
+// REGISTER USER
+export const register = ({username, password, email}) => (dispatch) => {
+
+// HEADERS
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
+
+    // REQUEST BODY
+    const body = JSON.stringify({username, password, email});
+
+    axios.post('api/auth/register', body, config).then(() => {
+        dispatch({type: REGISTER_SUCCESS});
+    }).catch(err => {
+        dispatch(returnErrors(err.response.data, err.response.status));
+        dispatch({type: REGISTER_FAIL});
+    })
+};

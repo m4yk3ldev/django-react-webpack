@@ -1,5 +1,10 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {register} from "../../actions/auth"
+import {createMessage} from "../../actions/messages"
+
 
 class Register extends React.Component {
     state = {
@@ -8,9 +13,19 @@ class Register extends React.Component {
         password: '',
         password2: '',
     }
+    static propTypes = {
+        register: PropTypes.func.isRequired,
+        createMessage: PropTypes.func.isRequired,
+        isAuthenticated: PropTypes.bool,
+    }
     onSubmit = (e) => {
         e.preventDefault();
-        console.log("Submit")
+        const {password, password2} = this.state;
+        if (password !== password2) {
+            this.props.createMessage({passwordNotMatch: "Passwords do not match"});
+        } else {
+            this.props.register(this.state);
+        }
     }
     onChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
@@ -26,20 +41,20 @@ class Register extends React.Component {
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <label>Username</label>
-                                <input type="text" name="username" className="form-control" onChange={this.onChange}
+                                <input type="text" required={true} name="username" className="form-control" onChange={this.onChange}
                                        value={username}/>
                             </div>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input type="text" name="email" className="form-control" onChange={this.onChange}
+                                <input type="email" name="email" required={true} className="form-control" onChange={this.onChange}
                                        value={email}/>
                             </div>
                             <div className="form-group">
                                 <label>Password</label>
-                                <input type="password" name="password" className="form-control" onChange={this.onChange}
+                                <input type="password" required={true} name="password" className="form-control" onChange={this.onChange}
                                        value={password}/>
                                 <br/>
-                                <input type="password2" name="password2" className="form-control"
+                                <input type="password" required={true} name="password2" className="form-control"
                                        onChange={this.onChange} value={password2}/>
                             </div>
                             <div className="form-group pt-2">
@@ -54,4 +69,7 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+})
+export default connect(mapStateToProps, {register, createMessage})(Register);
