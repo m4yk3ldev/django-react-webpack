@@ -33,6 +33,9 @@ class Register extends React.Component {
 
     render() {
         const {username, email, password, password2} = this.state;
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/"/>
+        }
         return (
             <React.Fragment>
                 <div className="col-md-6 m-auto">
@@ -41,17 +44,20 @@ class Register extends React.Component {
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <label>Username</label>
-                                <input type="text" required={true} name="username" className="form-control" onChange={this.onChange}
+                                <input type="text" required={true} name="username" className="form-control"
+                                       onChange={this.onChange}
                                        value={username}/>
                             </div>
                             <div className="form-group">
                                 <label>Email</label>
-                                <input type="email" name="email" required={true} className="form-control" onChange={this.onChange}
+                                <input type="email" name="email" required={true} className="form-control"
+                                       onChange={this.onChange}
                                        value={email}/>
                             </div>
                             <div className="form-group">
                                 <label>Password</label>
-                                <input type="password" required={true} name="password" className="form-control" onChange={this.onChange}
+                                <input type="password" required={true} name="password" className="form-control"
+                                       onChange={this.onChange}
                                        value={password}/>
                                 <br/>
                                 <input type="password" required={true} name="password2" className="form-control"
