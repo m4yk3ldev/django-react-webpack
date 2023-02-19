@@ -1,1 +1,1 @@
-# curso-react-django
+# django-react-webpack
